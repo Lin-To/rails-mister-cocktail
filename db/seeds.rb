@@ -5,13 +5,44 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-Ingredient.delete_all if Rails.env.development?
 
-Ingredient.create(name: "lemon")
-Ingredient.create(name: "ice")
-Ingredient.create(name: "mint leaves")
-Ingredient.create(name: "Whiskey")
-Ingredient.create(name: "Gin")
-Ingredient.create(name: "Tonic")
+# dependancy - need to delete doses first
 
-puts "#{Ingredient.count} ingredients added"
+require 'open-uri'
+
+if Rails.env.development?
+  Dose.delete_all
+  # kill the child first before can kill the parent
+  Ingredient.delete_all
+  Cocktail.delete_all
+end
+
+puts "deleted old data"
+
+# Ingredient.create(name: "lemon")
+# Ingredient.create(name: "ice")
+# Ingredient.create(name: "mint leaves")
+# Ingredient.create(name: "Whiskey")
+# Ingredient.create(name: "Gin")
+# Ingredient.create(name: "Tonic")
+
+# puts "#{Ingredient.count} ingredients added"
+
+url = "https://raw.github.com/maltyeva/iba-cocktails/blob/master/recipes.json"
+opened_url = open(url).read
+parsed_url = JSON.parse(opened_url)
+# add p to see what you get in terminal
+
+parsed_url.each do |cocktail|
+  c = Cocktail.create!(name: cocktails["name"])
+  cocktail["ingredients"].each do |ingredient|
+    if ingredient["ingredient"]
+      i = Ingredient.find_or_create_by!(name: ingredient["ingredient"])
+      d = Dose.create!(description: ingredient["amount"] + ingredient["unit"].to_s, cocktail: c, ingredient: i)
+      puts "Added #{d.description} of #{i.name} to #{c.name}"
+    end
+  end
+end
+
+# ruby has a active record "find or create by"
+

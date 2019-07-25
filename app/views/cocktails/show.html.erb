@@ -1,2 +1,7 @@
-<h1>Cocktails#show</h1>
+<h1><%= @cocktail.name %></h1>
 <p>Find me in app/views/cocktails/show.html.erb</p>
+
+<% dose.description.each do |dose| %>
+<%= dose.description %> - <% dose.ingredient.name %>
+
+<% end %>
