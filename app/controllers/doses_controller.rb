@@ -10,14 +10,14 @@ class DosesController < ApplicationController
     # cocktail/34/doses/new
     @dose = Dose.new
     @cocktail = Cocktail.find(params[:cocktail_id])
-    @ingredient = Ingredient.all.order(name: :asc)
+    @ingredients = Ingredient.all.order(name: :asc)
   end
 
   def create
     # create a new dose having all the required params
     @dose = Dose.new(dose_params)
     @cocktail = Cocktail.find(params[:cocktail_id])
-    @ingredient = Ingredient.all.order(name: :asc)
+    @ingredients = Ingredient.all.order(name: :asc)
     # find the relevant cocktail id
     @dose.cocktail = @cocktail
     if @dose.save
