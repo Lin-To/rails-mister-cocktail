@@ -1,8 +1,9 @@
-<h1 class="text-center">Cocktails#new</h1>
-<p>create a new cocktail</p>
+<h1 class="text-center">Add a cocktail</h1>
 
-<%= simpleform_for @cocktail do |f| %>
-<%= f.input :name, placeholder: "eg mojito" %>
-<%= f.submit "add a cocktail", class: "btn btn-primary" %>
+<div class="row"></div>
+<div class="col-8 offset-2"></div>
+  <%= simple_form_for @cocktail do |f| %>
+  <%= f.input :name, placeholder: "eg mojito" %>
+  <%= f.submit "submit", class: "btn btn-primary" %>
 
 <% end %>

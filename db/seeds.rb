@@ -19,30 +19,21 @@ end
 
 puts "deleted old data"
 
-# Ingredient.create(name: "lemon")
-# Ingredient.create(name: "ice")
-# Ingredient.create(name: "mint leaves")
-# Ingredient.create(name: "Whiskey")
-# Ingredient.create(name: "Gin")
-# Ingredient.create(name: "Tonic")
-
-# puts "#{Ingredient.count} ingredients added"
-
-url = "https://raw.github.com/maltyeva/iba-cocktails/blob/master/recipes.json"
+url = "https://raw.githubusercontent.com/maltyeva/iba-cocktails/master/recipes.json"
 opened_url = open(url).read
 parsed_url = JSON.parse(opened_url)
 # add p to see what you get in terminal
 
 parsed_url.each do |cocktail|
-  c = Cocktail.create!(name: cocktails["name"])
+  c = Cocktail.create!(name: cocktail["name"])
   cocktail["ingredients"].each do |ingredient|
     if ingredient["ingredient"]
-      i = Ingredient.find_or_create_by!(name: ingredient["ingredient"])
-      d = Dose.create!(description: ingredient["amount"] + ingredient["unit"].to_s, cocktail: c, ingredient: i)
+      i = Ingredient.find_or_create_by(name: ingredient["ingredient"])
+      d = Dose.create(description: ingredient["amount"].to_s + " " + ingredient["unit"], cocktail: c, ingredient: i)
       puts "Added #{d.description} of #{i.name} to #{c.name}"
     end
   end
 end
 
-# ruby has a active record "find or create by"
 
+# ruby has a active record "find or create by"
