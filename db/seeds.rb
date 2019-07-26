@@ -35,5 +35,19 @@ parsed_url.each do |cocktail|
   end
 end
 
-
 # ruby has a active record "find or create by"
+
+# url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s="
+# opened_url = open(url).read
+# parsed_url = JSON.parse(opened_url)
+
+# parsed_url.each do |cocktail|
+#   c = Cocktail.create!(name: cocktail["strDrink"])
+#   cocktail["ingredients"].each do |ingredient|
+#     if ingredient["ingredient"]
+#       i = Ingredient.find_or_create_by(name: ingredient["strIngredient1", "strIngredient2", "strIngredient3", "strIngredient4", "strIngredient5", "strIngredient6"])
+#       d = Dose.create(description: ingredient["amount"].to_s + " " + ingredient["unit"], cocktail: c, ingredient: i)
+#       puts "Added #{d.description} of #{i.name} to #{c.name}"
+#     end
+#   end
+# end

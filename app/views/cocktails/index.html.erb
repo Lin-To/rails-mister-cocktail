@@ -5,19 +5,31 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li>
-        <%= link_to "Create a Cocktail", new_cocktail_path, class:"btn btn-success" %>
+        <div class="button">
+        <%= link_to "Create a Cocktail", new_cocktail_path %>
+        </div>
       </li>
     </ul>
   </div>
 </div>
 
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1509807995916-c332365e2d9e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3371&q=80);">
+  <div class="container">
+    <h1>'Mix & Measures' <strong>Cocktails</strong></h1>
+    <p> Invent your own cocktails here and share! </p>
+    <a class="btn btn-flat" href="#"></a>
+  </div>
+</div>
 
 
-<p>here are a list of cocktails already created!</p>
+<div class="text-center my-3 p-3">
+  <p>Here are a list of coctails available</p>
+</div>
+
 <div class="row">
     <% @cocktails.each do |c| %>
     <div class="col-4">
-      <div class="card text-center my-3 p-3">
+      <div class="card text-center">
        <img src="https://images.unsplash.com/photo-1542849187-5ec6ea5e6a27?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2094&q=80" class="card-img-top" alt="...">
     <p><%= link_to c.name, cocktail_path(c) %></p>
       </div>

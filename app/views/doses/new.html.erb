@@ -1,9 +1,11 @@
 <h2>Add new dose! </h2>
 
+<div class="row">
+  <div class="col-8 offset-2">
   <%= simple_form_for [@cocktail, @dose] do |f| %>
   <%= f.input :description %>
-  <%= f.association :ingredient %>
+  <%= f.association :ingredient, collection: @ingredients %>
   <%= f.button :submit  %>
-
-<% end %>
-
+  <% end %>
+  </div>
+</div>
